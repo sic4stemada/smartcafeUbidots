@@ -14,7 +14,7 @@ DEVICE_LABEL = "motodc"
 VARIABLE_LABEL = "servo1"  # Variabel tombol yang sudah Anda buat
 
 def get_button_status():
-    url = f"https://industrial.api.ubidots.com/api/v1.6/devices/{DEVICE_LABEL}/{VARIABLE_LABEL}/"
+    url = "https://industrial.api.ubidots.com/api/v1.6/devices/motodc/servo1/"
     headers = {"X-Auth-Token": TOKEN}
     response = requests.get(url, headers=headers)
     data = response.json()
@@ -23,19 +23,23 @@ def get_button_status():
 try:
   while True:
         button_status = get_button_status()
-        print("Button Status:", button_status)
 
+        print("Button Status:", button_status)
+        
         if button_status == 1:
+            print("masuk")
             p.ChangeDutyCycle(5)
             time.sleep(2)
             p.ChangeDutyCycle(8)
             time.sleep(2)
             p.ChangeDutyCycle(5)
             time.sleep(2)
-            p.stop()
+           
 
         elif button_status == 0:
-            p.stop() 
+            print("stop")
+            p.ChangeDutyCycle(5)
+            time.sleep(2)
    
    
 except KeyboardInterrupt:

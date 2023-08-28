@@ -1,10 +1,10 @@
 import RPi.GPIO as GPIO
-import time
+import time 
 import requests
 
 # Konfigurasi pin motor DC
-in1 = 24
-in2 = 23
+in1 = 23
+in2 = 24
 en = 25
 
 # Setup GPIO
@@ -36,6 +36,8 @@ TOKEN = "BBFF-dsPG7gaq7lQdbxAJaYApcnIxbTEVHh"
 DEVICE_LABEL = "motodc"
 VARIABLE_LABEL = "meja1"  # Variabel tombol yang sudah Anda buat
 
+ # Time delay for stopping
+
 def get_button_status():
     url = f"https://industrial.api.ubidots.com/api/v1.6/devices/{DEVICE_LABEL}/{VARIABLE_LABEL}/"
     headers = {"X-Auth-Token": TOKEN}
@@ -49,23 +51,109 @@ try:
         print("Button Status:", button_status)
         
         if button_status == 1:
+            time.sleep(1)
             motor_maju()
-            print("Maju 3 detik")
-            time.sleep(3)
+            print("bubuk 1")
+            time.sleep(1)
             motor_berhenti()
-            print("Berhenti 2 detik")
-            time.sleep(2)
+            print("mandek 1")
+            time.sleep(3)
 
             motor_maju()
-            print("Maju 3 detik lagi")
-            time.sleep(3)
+            print("air")
+            time.sleep(1)
             motor_berhenti()
-            print("Berhenti 2 detik lagi")
+            print("mandek 2")
+            time.sleep(5)
+
+            motor_maju()
+            print("toping")
+            time.sleep(1)
+            motor_berhenti()
+            print("mandek 3")
             time.sleep(2)
 
         elif button_status == 0:
-            motor_berhenti()  # Menghentikan motor jika tombol off
+            motor_berhenti()
+            print("berhenti")
+
+            #mundur 
+
+             #motor_mundur()
+             #print("bubuk 1")
+             #time.sleep(1)
+             #motor_berhenti()
+             #print("mandek 1")
+             #time.sleep(2)
+
+             #motor_mundur()
+             #print("air")
+             #time.sleep(1)
+             #motor_berhenti()
+             #print("mandek 2")
+             #time.sleep(2)
+
+             #motor_mundur()
+             #print("toping")
+             #time.sleep(1)
+             #motor_berhenti()
+             #print("mandek 3")
+             #time.sleep(3)
+
+            # motor_maju()
+            # time.sleep(1)
+
+
+            # motor_maju()
+            # print("kopi 2")
+            # time.sleep(1)
+            # motor_berhenti
+            # time.sleep(1)
+            # motor_mundur()
+            # print("mundur")
+            # time.sleep(1)
+            # motor_maju()
+            # print("kopi 2")
+            # time.sleep(1)
+            # motor_berhenti()
+            # print("air")
+            # time.sleep(5)
+
+            # motor_mundur()
+            # print("mundur banyu")
+            # time.sleep(1)
+            # motor_berhenti()
+            # print("air")
+            # time.sleep(5)
+
+            # motor_maju()
+            # print("kopi 1")
+            # time.sleep(2)
+            # motor_mundur()
+            # print("mundur banyu")
+            # time.sleep(1)
+            # motor_berhenti()
+            # print("air")
+            # time.sleep(5)
+
+            # motor_maju()
+            # print("kopi 1")
+            # time.sleep(1)
+            # motor_mundur()
+            # print("mundur banyu")
+            # time.sleep(1)
+            # motor_berhenti()
+            # print("air")
+            # time.sleep(5)
+
+            # motor_maju()
+            # print("toping")
+            # time.sleep(3)
+            # motor_berhenti()
+            # print("meja 1")
+            # time.sleep(2)
 
 except KeyboardInterrupt:
     p.stop()
+    print("udah")
     GPIO.cleanup()
